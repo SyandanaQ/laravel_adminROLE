@@ -12,7 +12,19 @@ class Product extends Model
     // Menambahkan kolom yang dapat diisi secara massal
     protected $fillable = [
         'name',
+        'category_id',
+        'stok',
         'price',
         'sold_at',
     ];
+
+    protected $casts = [
+        'sold_at' => 'datetime',
+    ];
+
+     // Relasi ke kategori
+     public function category()
+     {
+         return $this->belongsTo(Category::class);
+     }
 }
