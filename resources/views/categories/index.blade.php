@@ -1,61 +1,55 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="max-w-full mx-auto py-10 sm:px-6 lg:px-8">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-6">Daftar Kategori</h2>
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('Daftar Kategori') }}
+    </h2>
 
-        <a href="{{ route('categories.create') }}" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mb-4 inline-block">
-            + Tambah Kategori
-        </a>
+    <div class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <a href="{{ route('categories.create') }}" class="bg-green-500 text-white px-4 py-2 rounded mb-4 inline-block">+
+            Tambah Kategori</a>
 
         @if (session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            <div class="bg-green-200 text-green-800 p-2 rounded mb-4">
                 {{ session('success') }}
             </div>
-            <script>
-                setTimeout(function() {
-                    document.getElementById('success-message').style.display = 'none';
-                }, 5000); // 5000 ms = 5 detik
-            </script>
         @endif
 
-        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-            <table class="min-w-full table-auto">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <table class="min-w-full">
                 <thead class="bg-gray-100">
                     <tr>
-                        <th class="p-3 text-left">#</th>
-                        <th class="p-3 text-left">Nama</th>
-                        <th class="p-3 text-left">Aksi</th>
+                        <th class="p-2 text-left">#</th>
+                        <th class="p-2 text-left">Nama Kategori</th>
+                        <th class="p-2 text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($categories as $category)
+                    @foreach ($categories as $category)
                         <tr class="border-t">
-                            <td class="p-3">{{ $loop->iteration }}</td>
-                            <td class="p-3">{{ $category->name }}</td>
-                            <td class="p-3">
-                                <a href="{{ route('categories.edit', $category) }}" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded mr-2 inline-block">Edit</a>
-                                <form action="{{ route('categories.destroy', $category) }}" method="POST" class="inline-block">
+                            <td class="p-2">{{ $loop->iteration }}</td>
+                            <td class="p-2">{{ $category->name }}</td>
+                            <td class="p-2 text-center">
+                                <a href="{{ route('categories.edit', $category) }}"
+                                    class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Edit</a>
+                                <form action="{{ route('categories.destroy', $category) }}" method="POST"
+                                    style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button onclick="return confirm('Hapus kategori ini?')" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">
-                                        Hapus
-                                    </button>
+                                    <button type="submit"
+                                        class="inline-block bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                                        onclick="return confirm('Hapus kategori ini?')">Hapus</button>
                                 </form>
                             </td>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="3" class="p-4 text-center text-gray-500">Belum ada kategori.</td>
-                        </tr>
-                    @endforelse
+                    @endforeach
                 </tbody>
             </table>
         </div>
 
-        <!-- Pagination Links -->
+        <!-- Pagination -->
         <div class="mt-4">
-            {{ $categories->links() }} <!-- Menampilkan link pagination -->
+            {{ $categories->links() }}
         </div>
     </div>
 @endsection
