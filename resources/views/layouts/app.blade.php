@@ -37,6 +37,13 @@
                         Admin
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('categories.index') }}" 
+                       class="flex items-center text-white hover:bg-gray-700 px-4 py-2 rounded {{ request()->routeIs('categories.index') ? 'bg-gray-700' : '' }}">
+                        <i class="fas fa-tags mr-3"></i>
+                        Kategori
+                    </a>
+                </li>
                 @endif
             </ul>
         </div>

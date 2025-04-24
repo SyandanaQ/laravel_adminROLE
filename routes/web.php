@@ -42,6 +42,10 @@ Route::middleware(['auth','is_admin'])->group(function () {
     Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');  // Edit user
     Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');  // Update user
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');  // Hapus user
+
+    // Rute untuk Category
+    Route::resource('categories', \App\Http\Controllers\CategoryController::class);
+
 });
 
 Route::resource('products', ProductController::class)->middleware(['auth']);
