@@ -5,7 +5,7 @@
         {{ __('Data Produk') }}
     </h2>
 
-    <div class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-12 mx-auto sm:px-6 lg:px-8">
         <a href="{{ route('products.create') }}" class="bg-green-500 text-white px-4 py-2 rounded mb-4 inline-block">+ Tambah Produk</a>
 
         @if (session('success'))

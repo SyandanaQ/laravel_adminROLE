@@ -12,7 +12,8 @@ class DashboardController extends Controller
     {
         $totalStock = Product::sum('stok');
         $totalUsers = User::count();
-
-        return view('dashboard.index', compact('totalStock', 'totalUsers'));
+        $totalPrice = number_format(Product::sum('price'), 0, ',', '.');
+        
+        return view('dashboard.index', compact('totalStock', 'totalUsers', 'totalPrice'));
     }
 }
