@@ -61,4 +61,21 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('products.index')->with('success', 'Produk berhasil dihapus.');
     }
+
+    public function chartData()
+    {
+        $products = Product::select('sold_at', 'price')
+            ->orderBy('sold_at', 'asc')
+            ->get()
+            ->map(function ($product) {
+                $product->sold_at = $product->sold_at->format('Y-m-d'); 
+                $product->price = (float)$product->price;
+                return $product;
+            });
+    
+        return response()->json($products);
+    }
+    
+
+    
 }
