@@ -10,7 +10,7 @@ class AdminController extends Controller
     public function index()
     {
         // Mendapatkan data user dari database
-        $users = User::all();
+        $users = User::paginate(10);
         return view('admin.index', compact('users'));
     }
 }

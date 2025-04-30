@@ -52,6 +52,10 @@
                     </div>
                 </div>
             </div>
+            <div class="mt-4">
+                {{ $users->links() }}
+            </div>
+    
         </div>
     </div>
 @endsection
